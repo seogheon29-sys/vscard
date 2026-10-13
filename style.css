@@ -242,8 +242,8 @@ a:focus-visible {
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 13px;
-  background: #1c1d26;
-  color: var(--ink);
+  background: #eb89c2;
+  color: #000000;
   font-size: 14px;
   font-weight: 750;
   transition: background .15s, transform .15s;
@@ -353,4 +353,3 @@ a:focus-visible {
     transition: none !important;
   }
 }
-가나다라
