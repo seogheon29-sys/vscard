@@ -11,6 +11,10 @@
   --accent-soft: #33232e;
 }
 
+/* ==================================
+   기본 초기화
+================================== */
+
 * {
   box-sizing: border-box;
 }
@@ -31,7 +35,8 @@ body {
   color: var(--ink);
 }
 
-button, a {
+button,
+a {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -46,20 +51,28 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
+/* ==================================
+   전체 레이아웃
+================================== */
+
 .layout {
   width: min(100%, 440px);
 }
 
 .card {
-  overflow: hidden;
+  /* 버튼 바깥으로 퍼지는 네온 그림자가 잘리지 않도록 합니다. */
+  overflow: visible;
   border: 1px solid var(--card-border);
   border-radius: 24px;
   background: var(--surface);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, .6),
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, .6),
     0 0 30px rgba(235, 137, 194, .08);
 }
 
-/* 헤더 */
+/* ==================================
+   헤더
+================================== */
 
 .header {
   display: flex;
@@ -82,7 +95,9 @@ a:focus-visible {
   letter-spacing: .11em;
 }
 
-/* 프로필 */
+/* ==================================
+   프로필
+================================== */
 
 .profile {
   padding: 35px 24px 29px;
@@ -104,7 +119,8 @@ a:focus-visible {
   border-radius: 50%;
   object-fit: cover;
   background: #2c303c;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, .36);
+  box-shadow:
+    0 6px 25px rgba(0, 0, 0, .36);
 }
 
 .avatar-fallback {
@@ -114,6 +130,8 @@ a:focus-visible {
   font-size: 38px;
   font-weight: 750;
 }
+
+/* 프로필 이미지 변경 버튼 */
 
 .camera {
   position: absolute;
@@ -135,6 +153,8 @@ a:focus-visible {
   background: var(--accent-color);
 }
 
+/* 이름 */
+
 .name {
   margin: 0;
   font-size: calc(30px + 1pt);
@@ -142,11 +162,15 @@ a:focus-visible {
   letter-spacing: -.06em;
 }
 
+/* 직업 */
+
 .job {
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
 }
+
+/* 핑크 포인트 라인 */
 
 .accent {
   width: 30px;
@@ -156,7 +180,9 @@ a:focus-visible {
   background: var(--accent-color);
 }
 
-/* 연락처 */
+/* ==================================
+   연락처
+================================== */
 
 .contacts {
   border-top: 1px solid var(--line);
@@ -180,6 +206,8 @@ a:focus-visible {
 .contact:hover .value {
   color: var(--accent-color);
 }
+
+/* 연락처 아이콘 */
 
 .symbol {
   width: 44px;
@@ -228,7 +256,150 @@ a:focus-visible {
   font-size: 22px;
 }
 
-/* 하단 버튼 */
+/* ==================================
+   이메일 복사 / 전화하기 버튼
+================================== */
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 19px 28px 29px;
+}
+
+.quick-action {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  min-height: 51px;
+
+  padding: 12px;
+
+  border: 1px solid var(--accent-color);
+  border-radius: 13px;
+
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, .22);
+
+  transition:
+    transform .22s ease,
+    box-shadow .25s ease,
+    background-color .25s ease,
+    color .25s ease,
+    border-color .25s ease;
+}
+
+/* 이메일 복사 버튼 */
+
+.quick-action--email {
+  background: var(--accent-color);
+  color: #14151c;
+}
+
+/* 전화하기 버튼 */
+
+.quick-action--phone {
+  background: #1c1d26;
+  color: var(--accent-color);
+}
+
+/* ==================================
+   버튼 주변 핑크 네온 효과
+   흐릿한 빛과 외부 그림자를 조합합니다.
+================================== */
+
+.quick-action {
+  isolation: isolate;
+  /* 기본 상태에서도 극히 약한 빛 */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+}
+
+/* 빛이 버튼 가장자리 바깥으로 자연스럽게 번집니다. */
+.quick-action::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border-radius: 16px;
+  background: rgba(235, 137, 194, .4);
+  filter: blur(12px);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+/* 안쪽 조명은 버튼 텍스트를 가리지 않습니다. */
+.quick-action::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    rgba(255, 255, 255, .2),
+    transparent 70%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+
+@media (hover: hover) {
+  .quick-action:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 12px rgba(235, 137, 194, .55),
+      0 0 26px rgba(235, 137, 194, .28),
+      0 8px 20px rgba(0, 0, 0, .3);
+  }
+
+  .quick-action:hover::before { opacity: .45; }
+  .quick-action:hover::after { opacity: .45; }
+
+  .quick-action--email:hover { background: #ef9bcc; }
+  .quick-action--phone:hover {
+    background: #27212b;
+    color: #f3a9d1;
+  }
+}
+
+/* 클릭 후 JS에서 1초 동안 클래스를 유지합니다. */
+.quick-action.is-glowing,
+.quick-action:active {
+  transform: translateY(-2px) scale(.99);
+  box-shadow:
+    0 0 12px rgba(235, 137, 194, .8),
+    0 0 28px rgba(235, 137, 194, .48),
+    0 0 45px rgba(235, 137, 194, .24),
+    0 8px 20px rgba(0, 0, 0, .3);
+}
+
+.quick-action.is-glowing::before,
+.quick-action:active::before { opacity: .8; }
+
+.quick-action.is-glowing::after,
+.quick-action:active::after { opacity: 1; }
+
+.quick-action:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+/* ==================================
+   기존 하단 버튼
+   연락처 저장 / 명함 공유
+================================== */
 
 .actions {
   display: grid;
@@ -242,11 +413,14 @@ a:focus-visible {
   padding: 12px;
   border: 1px solid var(--line);
   border-radius: 13px;
-  background: #eb89c2;
-  color: #000000;
+  background: #1c1d26;
+  color: var(--ink);
   font-size: 14px;
   font-weight: 750;
-  transition: background .15s, transform .15s;
+
+  transition:
+    background .15s,
+    transform .15s;
 }
 
 .btn:hover {
@@ -263,6 +437,10 @@ a:focus-visible {
 .btn-primary:hover {
   background: #f3a9d1;
 }
+
+/* ==================================
+   하단 안내 문구 및 초기화
+================================== */
 
 .below {
   margin: 18px auto 0;
@@ -281,23 +459,32 @@ a:focus-visible {
   text-decoration: underline;
 }
 
-/* 알림 */
+/* ==================================
+   알림 메시지
+================================== */
 
 .toast {
   position: fixed;
   left: 50%;
   bottom: 25px;
+
   max-width: calc(100vw - 32px);
+
   transform: translate(-50%, 12px);
+
   padding: 12px 17px;
+
   border-radius: 12px;
   background: #25232c;
   color: var(--ink);
   border: 1px solid var(--card-border);
+
   font-size: 13px;
   opacity: 0;
   visibility: hidden;
+
   transition: .2s ease;
+
   text-align: center;
   z-index: 5;
 }
@@ -308,9 +495,12 @@ a:focus-visible {
   transform: translate(-50%, 0);
 }
 
-/* 모바일 반응형 */
+/* ==================================
+   모바일 반응형
+================================== */
 
 @media (max-width: 480px) {
+
   body {
     padding: 15px;
   }
@@ -335,21 +525,62 @@ a:focus-visible {
     padding: 15px 23px 25px;
   }
 
+  .quick-actions {
+    padding: 19px 23px 25px;
+  }
+
   .name {
     font-size: calc(28px + 1pt);
   }
 }
 
+/* ==================================
+   작은 모바일 화면
+================================== */
+
 @media (max-width: 340px) {
-  .actions {
+
+  .actions,
+  .quick-actions {
     grid-template-columns: 1fr;
   }
 }
 
+/* ==================================
+   접근성: 움직임 최소화
+================================== */
+
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
     transition: none !important;
+  }
+
+  .quick-action:hover,
+  .quick-action:active,
+  .quick-action.is-glowing {
+    transform: none;
+  }
+}
+@media (hover: hover) {
+  .actions .btn:hover {
+    box-shadow:
+      0 0 12px rgba(235, 137, 194, 0.55),
+      0 0 26px rgba(235, 137, 194, 0.28);
+  }
+}
+
+.actions .btn.is-glowing {
+  box-shadow:
+    0 0 12px rgba(235, 137, 194, 0.8),
+    0 0 28px rgba(235, 137, 194, 0.48),
+    0 0 45px rgba(235, 137, 194, 0.24);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .actions .btn.is-glowing {
+    transform: none;
   }
 }
