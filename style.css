@@ -1,0 +1,356 @@
+
+:root {
+  color-scheme: dark;
+  --bg: #000000;
+  --surface: #14151c;
+  --ink: #f2f3f7;
+  --muted: #a5aab9;
+  --line: #30313e;
+  --card-border: #eb89c2;
+  --accent-color: #eb89c2;
+  --accent-soft: #33232e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 24px;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "Noto Sans KR", sans-serif;
+  color: var(--ink);
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--accent-color);
+  outline-offset: 3px;
+}
+
+.layout {
+  width: min(100%, 440px);
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .6),
+    0 0 30px rgba(235, 137, 194, .08);
+}
+
+/* 헤더 */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 28px 28px 0;
+}
+
+.brand {
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: -.05em;
+}
+
+.eyebrow {
+  color: #adb0be;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .11em;
+}
+
+/* 프로필 */
+
+.profile {
+  padding: 35px 24px 29px;
+  text-align: center;
+}
+
+.avatar-wrap {
+  position: relative;
+  width: 124px;
+  height: 124px;
+  margin: 0 auto 24px;
+}
+
+.avatar {
+  width: 124px;
+  height: 124px;
+  display: block;
+  border: 5px solid var(--surface);
+  border-radius: 50%;
+  object-fit: cover;
+  background: #2c303c;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, .36);
+}
+
+.avatar-fallback {
+  display: grid;
+  place-items: center;
+  color: #bfc3d2;
+  font-size: 38px;
+  font-weight: 750;
+}
+
+.camera {
+  position: absolute;
+  bottom: 0;
+  right: -3px;
+  width: 37px;
+  height: 37px;
+  display: grid;
+  place-items: center;
+  border: 3px solid var(--surface);
+  border-radius: 50%;
+  background: #383044;
+  color: var(--ink);
+  font-size: 23px;
+  line-height: 1;
+}
+
+.camera:hover {
+  background: var(--accent-color);
+}
+
+.name {
+  margin: 0;
+  font-size: calc(30px + 1pt);
+  font-weight: 850;
+  letter-spacing: -.06em;
+}
+
+.job {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.accent {
+  width: 30px;
+  height: 3px;
+  margin: 26px auto 0;
+  border-radius: 4px;
+  background: var(--accent-color);
+}
+
+/* 연락처 */
+
+.contacts {
+  border-top: 1px solid var(--line);
+  padding: 13px 28px;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  padding: 16px 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact + .contact {
+  border-top: 1px solid var(--line);
+}
+
+.contact:hover .value {
+  color: var(--accent-color);
+}
+
+.symbol {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  background: var(--accent-soft);
+  border-radius: 13px;
+  color: var(--accent-color);
+}
+
+.symbol svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.label {
+  display: block;
+  color: #a7adbe;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  margin-bottom: 5px;
+}
+
+.value {
+  display: block;
+  font-size: 15px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.arrow {
+  color: #9297aa;
+  font-size: 22px;
+}
+
+/* 하단 버튼 */
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 15px 28px 29px;
+}
+
+.btn {
+  min-height: 51px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: #1c1d26;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 750;
+  transition: background .15s, transform .15s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  background: #2a2631;
+}
+
+.btn-primary {
+  color: #20151d;
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+  background: #f3a9d1;
+}
+
+.below {
+  margin: 18px auto 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.reset {
+  margin-top: 6px;
+  padding: 3px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  text-decoration: underline;
+}
+
+/* 알림 */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 25px;
+  max-width: calc(100vw - 32px);
+  transform: translate(-50%, 12px);
+  padding: 12px 17px;
+  border-radius: 12px;
+  background: #25232c;
+  color: var(--ink);
+  border: 1px solid var(--card-border);
+  font-size: 13px;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s ease;
+  text-align: center;
+  z-index: 5;
+}
+
+.toast.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* 모바일 반응형 */
+
+@media (max-width: 480px) {
+  body {
+    padding: 15px;
+  }
+
+  .card {
+    border-radius: 20px;
+  }
+
+  .header {
+    padding: 24px 23px 0;
+  }
+
+  .profile {
+    padding: 34px 20px 27px;
+  }
+
+  .contacts {
+    padding: 12px 23px;
+  }
+
+  .actions {
+    padding: 15px 23px 25px;
+  }
+
+  .name {
+    font-size: calc(28px + 1pt);
+  }
+}
+
+@media (max-width: 340px) {
+  .actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}
+가나다라
